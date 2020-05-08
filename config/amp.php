@@ -2,7 +2,7 @@
 
 return [
 
-    'prefix' => 'gm',
+    'prefix' => 'amp',
 
     // (optional)
     'view-affix' => '-amp',
