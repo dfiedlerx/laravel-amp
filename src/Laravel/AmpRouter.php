@@ -53,8 +53,21 @@ class AmpRouter
 
             $ampRouteName = $action['as'] . '.amp';
 
-            $router->get($url, array_merge($action, ['amp' => $ampRouteName]));
-            $router->get($prefixed, array_merge($action, ['as' => $ampRouteName]));
+            if (isset($action['where'])) {
+
+                $where = $action['where'];
+                unset($action['where']);
+
+                $router->get($url, array_merge($action, ['amp' => $ampRouteName]))->where($where['0'], $where['1']);
+                $router->get($prefixed, array_merge($action, ['as' => $ampRouteName]))->where($where['0'], $where['1']);
+
+            } else {
+
+                $router->get($url, array_merge($action, ['amp' => $ampRouteName]));
+                $router->get($prefixed, array_merge($action, ['as' => $ampRouteName]));
+
+            }
+            
         });
     }
 }
